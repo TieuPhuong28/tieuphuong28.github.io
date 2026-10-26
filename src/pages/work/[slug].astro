@@ -1,0 +1,69 @@
+---
+import Base from "../../layouts/Base.astro";
+import { render } from "astro:content";
+import { getProjects } from "../../lib/projects";
+import { url } from "../../lib/url";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+const meta = [
+  ["Client", d.client],
+  ["Role", d.role],
+  ["Timeline", d.timeline],
+  ["Deliverables", d.platforms],
+].filter(([, v]) => v);
+---
+
+<Base title={d.title} description={d.summary} image={d.cover}>
+  <article>
+    <header class="project-head container">
+      <a class="link-back" href={url("/work/")}>← All work</a>
+      <p class="eyebrow">{d.category}</p>
+      <h1 class="display">{d.title}</h1>
+      {d.summary && <p class="lead">{d.summary}</p>}
+    </header>
+
+    <div class="container">
+      <img class="project-cover" src={url(d.cover)} alt={d.title} />
+    </div>
+
+    <section class="container project-info">
+      <dl class="meta">
+        {
+          meta.map(([k, v]) => (
+            <div>
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="prose">
+        <Content />
+      </div>
+    </section>
+
+    <section class="container gallery">
+      {d.gallery.map((src, i) => <img src={url(src)} alt={`${d.title} — image ${i + 2}`} loading="lazy" decoding="async" />)}
+    </section>
+
+    {
+      next && next.id !== project.id && (
+        <a class="next-project container" href={url(`/work/${next.id}/`)}>
+          <span class="eyebrow">Next project</span>
+          <span class="next-title">{next.data.title} →</span>
+          <img src={url(next.data.cover)} alt="" loading="lazy" decoding="async" />
+        </a>
+      )
+    }
+  </article>
+</Base>

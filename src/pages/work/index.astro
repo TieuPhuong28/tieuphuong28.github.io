@@ -1,0 +1,45 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getProjects } from "../../lib/projects";
+
+const projects = await getProjects();
+const categories = [...new Set(projects.map((p) => p.data.category))];
+---
+
+<Base title="Work" description="Selected branding, event, campaign and packaging projects by Thu Thuy.">
+  <section class="page-head container">
+    <h1 class="display">Work</h1>
+    <p class="lead">Brand identities, event visuals, campaigns and packaging for hospitality and real estate brands.</p>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="chip" aria-pressed="true" data-filter="all">All <span>{projects.length}</span></button>
+      {
+        categories.map((c) => (
+          <button class="chip" aria-pressed="false" data-filter={c}>
+            {c} <span>{projects.filter((p) => p.data.category === c).length}</span>
+          </button>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container section-tight">
+    <div class="grid" id="work-grid">
+      {projects.map((p, i) => <ProjectCard project={p} eager={i < 2} />)}
+    </div>
+  </section>
+</Base>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".chip");
+  const cards = document.querySelectorAll<HTMLElement>("#work-grid .card");
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () => {
+      const f = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      cards.forEach((card) => {
+        card.hidden = f !== "all" && card.dataset.category !== f;
+      });
+    }),
+  );
+</script>

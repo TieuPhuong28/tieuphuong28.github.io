@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Clients from "../components/Clients.astro";
+import site from "../data/site.json";
+import { url } from "../lib/url";
+
+const facts = [
+  ["Experience", site.experience],
+  ["Based in", site.location],
+  ["Focus", "Hospitality, resorts & real estate"],
+  ["Currently", site.status],
+].filter(([, v]) => v);
+---
+
+<Base title="About" image={site.portrait}>
+  <section class="about-hero container">
+    <figure class="about-portrait">
+      <img src={url(site.portrait)} alt={`Portrait of ${site.name}`} />
+    </figure>
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 class="display">Hello, I'm {site.name}.</h1>
+      <p class="muted">You can also call me {site.nickname}.</p>
+      {site.about.map((p) => <p class="lead">{p}</p>)}
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#contact">Say hello →</a>
+        {site.resume && <a class="btn btn-ghost" href={site.resume} target="_blank" rel="noopener">Résumé ↓</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <dl class="facts">
+      {
+        facts.map(([k, v]) => (
+          <div>
+            <dt>{k}</dt>
+            <dd>{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="section container two-col">
+    <h2 class="h2">What I do</h2>
+    <ul class="pill-list">
+      {site.expertise.map((e) => <li>{e}</li>)}
+    </ul>
+  </section>
+
+  <Clients />
+
+  <section class="section container two-col">
+    <h2 class="h2">Beyond the work</h2>
+    <ul class="pill-list">
+      {site.hobbies.map((h) => <li>{h}</li>)}
+    </ul>
+  </section>
+</Base>

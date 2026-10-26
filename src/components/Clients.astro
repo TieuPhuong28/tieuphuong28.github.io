@@ -1,0 +1,12 @@
+---
+import site from "../data/site.json";
+---
+
+<section class="clients" aria-label="Clients">
+  <div class="container">
+    <p class="eyebrow">Brands I've worked with</p>
+    <ul class="clients-list">
+      {site.clients.map((c) => <li>{c}</li>)}
+    </ul>
+  </div>
+</section>

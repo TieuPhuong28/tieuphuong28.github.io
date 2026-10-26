@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Clients from "../components/Clients.astro";
+import site from "../data/site.json";
+import { getProjects } from "../lib/projects";
+import { url } from "../lib/url";
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured);
+const selected = featured.length ? featured : projects.slice(0, 4);
+---
+
+<Base>
+  <section class="hero container">
+    <div class="hero-text">
+      <div class="hero-tags">
+        <span class="tag">{site.role}</span>
+        <span class="tag">{site.location}</span>
+        {site.status && <span class="tag tag-status"><i></i>{site.status}</span>}
+      </div>
+      <h1 class="display">{site.headline}</h1>
+      <p class="lead">{site.intro}</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href={url("/work/")}>View my work →</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <figure class="hero-portrait">
+      <img src={url(site.portrait)} alt={`Portrait of ${site.name}`} />
+      <span class="sticker" aria-hidden="true">✶</span>
+    </figure>
+  </section>
+
+  <Clients />
+
+  <section class="section container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2 class="h2">Recent projects</h2>
+      </div>
+      <a class="link-arrow" href={url("/work/")}>All {projects.length} projects →</a>
+    </div>
+    <div class="grid">
+      {selected.map((p, i) => <ProjectCard project={p} eager={i < 2} />)}
+    </div>
+  </section>
+
+  <section class="section container intro-block">
+    <p class="eyebrow">About</p>
+    <div class="intro-grid">
+      <h2 class="h2">Hello, I'm {site.name}.</h2>
+      <div>
+        <p class="lead">{site.about[0]}</p>
+        <a class="link-arrow" href={url("/about/")}>More about me →</a>
+      </div>
+    </div>
+  </section>
+</Base>

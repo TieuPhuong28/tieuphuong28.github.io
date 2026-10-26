@@ -1,0 +1,89 @@
+# Pages CMS configuration (https://pagescms.org)
+# Defines the editing forms shown in the CMS. Images are uploaded to public/images.
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: projects
+    label: Dự án (Projects)
+    type: collection
+    path: src/content/projects
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, category, client, order, draft]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Tên dự án
+        type: string
+        required: true
+      - name: summary
+        label: Mô tả ngắn (1–2 câu, hiện dưới tiêu đề)
+        type: text
+      - name: category
+        label: Loại dự án (dùng cho bộ lọc)
+        type: select
+        options:
+          values: [Brand Identity, Event, Campaign, Packaging, Print, Digital]
+      - name: client
+        label: Khách hàng
+        type: string
+      - name: role
+        label: Vai trò
+        type: string
+      - name: timeline
+        label: Thời gian (vd. Aug – Sep 2024)
+        type: string
+      - name: platforms
+        label: Hạng mục / Deliverables
+        type: string
+      - name: cover
+        label: Ảnh bìa (tỉ lệ ngang 16:10 đẹp nhất)
+        type: image
+        required: true
+      - name: gallery
+        label: Ảnh chi tiết (kéo để đổi thứ tự)
+        type: image
+        list: true
+      - name: featured
+        label: Hiện ở trang chủ
+        type: boolean
+      - name: order
+        label: Thứ tự (1 = đứng đầu)
+        type: number
+      - name: draft
+        label: Ẩn dự án (bản nháp)
+        type: boolean
+      - name: body
+        label: Nội dung chi tiết (Concept, Challenge, Process…)
+        type: rich-text
+
+  - name: site
+    label: Thông tin cá nhân & liên hệ
+    type: file
+    path: src/data/site.json
+    fields:
+      - { name: name, label: Tên hiển thị, type: string }
+      - { name: nickname, label: Biệt danh, type: string }
+      - { name: role, label: Chức danh, type: string }
+      - { name: location, label: Nơi ở, type: string }
+      - { name: status, label: Trạng thái (để trống để ẩn), type: string }
+      - { name: experience, label: Số năm kinh nghiệm, type: string }
+      - { name: headline, label: Câu tiêu đề lớn ở trang chủ, type: text }
+      - { name: intro, label: Đoạn giới thiệu ở trang chủ, type: text }
+      - { name: about, label: Các đoạn giới thiệu ở trang About, type: text, list: true }
+      - { name: portrait, label: Ảnh chân dung, type: image }
+      - { name: shareImage, label: Ảnh hiện khi chia sẻ link (1200x630), type: image }
+      - { name: clients, label: Khách hàng tiêu biểu, type: string, list: true }
+      - { name: expertise, label: Chuyên môn, type: string, list: true }
+      - { name: hobbies, label: Sở thích, type: string, list: true }
+      - { name: email, label: Email, type: string }
+      - { name: linkedin, label: Link LinkedIn, type: string }
+      - { name: instagram, label: Link Instagram, type: string }
+      - { name: resume, label: Link CV (PDF), type: string }
+      - { name: contactTitle, label: Tiêu đề phần liên hệ, type: string }
+      - { name: contactText, label: Đoạn văn phần liên hệ, type: text }
+      - { name: seoDescription, label: Mô tả cho Google (~155 ký tự), type: text }

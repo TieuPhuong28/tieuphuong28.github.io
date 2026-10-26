@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { url } from "../lib/url";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+const d = project.data;
+---
+
+<a class="card" href={url(`/work/${project.id}/`)} data-category={d.category}>
+  <div class="card-media">
+    <img src={url(d.cover)} alt={d.title} loading={eager ? "eager" : "lazy"} decoding="async" />
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{d.title}</h3>
+    <p class="card-meta">{[d.category, d.client].filter(Boolean).join(" · ")}</p>
+  </div>
+</a>
