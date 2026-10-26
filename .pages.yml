@@ -49,7 +49,7 @@ content:
         type: image
         list: true
       - name: featured
-        label: Hiện ở trang chủ
+        label: Ưu tiên hiện ở trang chủ (trang chủ luôn hiện 4 dự án)
         type: boolean
       - name: order
         label: Thứ tự (1 = đứng đầu)

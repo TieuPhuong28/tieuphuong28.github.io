@@ -6,9 +6,13 @@ import site from "../data/site.json";
 import { getProjects } from "../lib/projects";
 import { url } from "../lib/url";
 
+// Always show 4 projects: ticked "featured" ones first, then fill up by order.
+const HOME_COUNT = 4;
 const projects = await getProjects();
-const featured = projects.filter((p) => p.data.featured);
-const selected = featured.length ? featured : projects.slice(0, 4);
+const selected = [
+  ...projects.filter((p) => p.data.featured),
+  ...projects.filter((p) => !p.data.featured),
+].slice(0, HOME_COUNT);
 ---
 
 <Base>
