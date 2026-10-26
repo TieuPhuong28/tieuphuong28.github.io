@@ -1,6 +1,7 @@
 ---
 title: Art Music Camp
-summary: Key visual and event materials for a music and art camp at Flamingo Dai Lai Resort.
+summary: Key visual and event materials for a music and art camp at Flamingo Dai
+  Lai Resort.
 category: Event
 client: Flamingo Dai Lai Resort
 role: Graphic Designer
@@ -18,7 +19,6 @@ gallery:
   - /images/projects/art-music-camp/09.png
 featured: false
 order: 6
-draft: false
+draft: true
 ---
-
 Key visual and event materials for Art Music Camp at Flamingo Dai Lai Resort.
