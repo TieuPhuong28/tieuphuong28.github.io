@@ -13,9 +13,28 @@
   ],
   "portrait": "/images/about/portrait.jpg",
   "shareImage": "/images/projects/yoko-onsen-quang-hanh/01.jpg",
-  "clients": ["Sun Group", "FLC Group", "Flamingo Hotels & Resorts", "Flamingo Dai Lai Resort", "AoTaa Spa & Wellness"],
-  "expertise": ["Brand Identity", "Logo Design", "Key Visual", "Advertising & Campaign", "Packaging", "Editorial & Print", "Event Visual Identity", "Motion & Video Editing", "AI-assisted Design", "UI Design"],
-  "hobbies": ["Walking", "Painting & photography", "A cat person"],
+  "clients": [
+    "Sun Group",
+    "FLC Group",
+    "Flamingo Hotels & Resorts"
+  ],
+  "expertise": [
+    "Brand Identity",
+    "Logo Design",
+    "Key Visual",
+    "Advertising & Campaign",
+    "Packaging",
+    "Editorial & Print",
+    "Event Visual Identity",
+    "Motion & Video Editing",
+    "AI-assisted Design",
+    "UI Design"
+  ],
+  "hobbies": [
+    "Walking",
+    "Painting & photography",
+    "A cat person"
+  ],
   "email": "tranthuthuy291@gmail.com",
   "linkedin": "https://www.linkedin.com/in/thu-thuy-tran-41a1154b/",
   "instagram": "https://www.instagram.com/saubeo.oo/",
